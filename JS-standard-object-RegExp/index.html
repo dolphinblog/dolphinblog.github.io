@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="RegExp  RegExp又到了“喜闻乐见”的Regular Expression环节了。">
+<meta name="keywords" content="standard object,RegExp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS笔记| 标准对象| RegExp">
+<meta property="og:url" content="http://vinsonwei.com/JS-standard-object-RegExp/index.html">
+<meta property="og:site_name" content="vinson&#39;s blog">
+<meta property="og:description" content="RegExp  RegExp又到了“喜闻乐见”的Regular Expression环节了。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/005BEzjely1fnw7z7hiuaj30hd05ktbl.jpg">
+<meta property="og:updated_time" content="2018-04-06T11:13:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS笔记| 标准对象| RegExp">
+<meta name="twitter:description" content="RegExp  RegExp又到了“喜闻乐见”的Regular Expression环节了。">
+<meta name="twitter:image" content="https://wx2.sinaimg.cn/mw690/005BEzjely1fnw7z7hiuaj30hd05ktbl.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://vinsonwei.com/JS-standard-object-RegExp/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>JS笔记| 标准对象| RegExp | vinson's blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">vinson's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">grasp and learn!</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vinsonwei.com/JS-standard-object-RegExp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="vinson">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vinson's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JS笔记| 标准对象| RegExp
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-01-26 00:00:00" itemprop="dateCreated datePublished" datetime="2018-01-26T00:00:00+08:00">2018-01-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-04-06 19:13:32" itemprop="dateModified" datetime="2018-04-06T19:13:32+08:00">2018-04-06</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JS/" itemprop="url" rel="index"><span itemprop="name">JS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://wx2.sinaimg.cn/mw690/005BEzjely1fnw7z7hiuaj30hd05ktbl.jpg" alt=""></p>
+<blockquote class="blockquote-center"><p><a href="https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/001434499503920bb7b42ff6627420da2ceae4babf6c4f2000" target="_blank" rel="noopener">RegExp</a></p>
+</blockquote>
+<h4 id="RegExp"><a href="#RegExp" class="headerlink" title="RegExp"></a><code>RegExp</code></h4><p>又到了“喜闻乐见”的<code>Regular Expression</code>环节了。</p>
+<a id="more"></a>
+<p>字符串是编程时接触最多的一种数据结果，对字符串的处理需求无处不在，比如判断一个字符串是不是一个合法的Email地址等等。</p>
+<p>正则表达式是一种用来匹配字符串的强有力的武器。它的设计思想：用一种描述性语言来定义一个字符串，凡是符合这个定义的字符串，就认为它<code>匹配</code>了。所以判读一个字符串是否合法的Email的方法是：</p>
+<ol>
+<li>创建一个匹配Email的正则表达式；</li>
+<li>用该正则表达式去检验用户的输入是否匹配。</li>
+</ol>
+<p>正则表达式本身也是用一个字符串表示的，所以，首先需要了解<code>如何用字符来描述字符</code>。</p>
+<p>正则表达式中，如果直接给出字符，就是精确匹配。</p>
+<p>比如，用<code>\d</code>可以匹配一个数字，<code>\w</code>可以匹配一个字母或数字，所以：</p>
+<ul>
+<li><code>00\d</code>可以匹配<code>007</code>，但是无法匹配<code>00A</code></li>
+<li><code>\d\d\d</code>可以匹配<code>010</code></li>
+<li><code>\w\w</code>可以匹配<code>js</code></li>
+</ul>
+<p><code>.</code>可以匹配任意字符（也包括<code>.</code>自己），所以<code>js.</code>可以匹配<code>jsp</code> <code>jsx</code> ‘js!’等等。</p>
+<p>要匹配变长的字符，在正则表达式中，用<code>*</code>表示任意个字符（包括0个），用<code>+</code>表示至少一个字符，用<code>？</code>表示0个或1个字符，用<code>{n}</code>表示n个字符，用<code>{n,m}</code>表示n-m个字符。</p>
+<p>来看一个较复杂的正则表达式：<code>\d{3}\s+\d{3,8}</code></p>
+<p>其中，</p>
+<ul>
+<li><code>\d{3}</code>表示匹配3个数字，例如<code>&#39;010&#39;</code></li>
+<li><code>\s</code>可以匹配一个空格（也包括Tab等空白符），所以<code>\s+</code>表示至少有一个空格，例如匹配<code>&#39; &#39;</code>，<code>&#39;\t\t&#39;</code>等</li>
+<li><code>\d{3,8}</code>表示3-8个数字，例如<code>&#39;1234567&#39;</code></li>
+</ul>
+<p>所以上面的正则表达式可以匹配以任意个空格隔开的带区号（3位）的电话号码。</p>
+<p>如果匹配<code>010-12345</code>，可用<code>\d{3}\-\d{3,8}</code>，那么对于<code>010 - 12345</code>，因为带有空格，所以又需要重新写正则了，所以需要更加有效的匹配方式。</p>
+<h5 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h5><p>如果要更有效地匹配，可以用<code>[]</code>表示范围，比如：</p>
+<p><code>[0-9a-zA-Z\_]</code>可以匹配<code>1个</code>数字，字母或者下划线；<br><code>[0-9a-zA-Z\_]+</code>可以匹配<code>至少1个</code>数字，字母或者下划线组成的字符串，如<code>&#39;a100&#39;</code>，<code>&#39;0_Z&#39;</code>，<code>&#39;js2015&#39;</code>等。<br><code>[a-zA-Z\_\$][0-9a-zA-Z\_\$]*</code>可以匹配由字母或下划线、$开头，后接任意个由一个数字、字母或者下划线、$组成的字符串，也就是JavaScript允许的变量名；<br><code>[a-zA-Z\_\$][0-9a-zA-Z\_\$]{0, 19}</code>更精确地限制了变量的长度是1-20个字符（前面1个字符+后面最多19个字符）。<br><code>A|B</code>可以匹配A或B，所以<code>(J|j)ava(S|s)cript</code>可以匹配<code>&#39;JavaScript&#39;</code>、<code>&#39;Javascript&#39;</code>、<code>&#39;javaScript&#39;</code>或者<code>&#39;javascript&#39;</code>。</p>
+<p><code>^</code>表示行的开头，<code>^\d</code>表示必须以数字开头。<br><code>$</code>表示行的结束，<code>\d$</code>表示必须以数字结束。</p>
+<p>有了预备知识，现在就可以在JS中使用正则表达式了。</p>
+<p>JavaScript有两种方式创建一个正则表达式：</p>
+<p>第一种方式是直接通过<code>/正则表达式/</code>写出来，第二种方式是通过<code>new RegExp(&#39;正则表达式&#39;)</code>创建一个RegExp对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> re1 = <span class="regexp">/ABC\-001/</span>;</span><br><span class="line"><span class="keyword">var</span> re2 = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'ABC\\-001'</span>);</span><br><span class="line"></span><br><span class="line">[node.js]</span><br><span class="line">&gt; re1; </span><br><span class="line">/ABC\<span class="number">-001</span>/</span><br><span class="line">&gt; re2; </span><br><span class="line">/ABC\<span class="number">-001</span>/</span><br></pre></td></tr></table></figure>
+<p>注意，如果使用第二种写法，因为字符串的转义问题(字符串中的<code>\</code>被认为是转义字符，而不是其自身)，字符串的两个<code>\\</code>实际上是一个<code>\</code>。</p>
+<figure class="highlight js"><figcaption><span>node.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">var</span> re = <span class="regexp">/^\d&#123;3&#125;\-\d&#123;3,8&#125;$/</span>;</span><br><span class="line"><span class="literal">undefined</span></span><br><span class="line">&gt; re.test(<span class="string">'010-12345'</span>);</span><br><span class="line"><span class="literal">true</span></span><br><span class="line">&gt; re.test(<span class="string">'010-1234x'</span>);</span><br><span class="line"><span class="literal">false</span></span><br><span class="line">&gt; re.test(<span class="string">'010 1234'</span>);</span><br><span class="line"><span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>RegExp对象的<code>test()</code>方法用于测定给定的字符串是否符合条件。</p>
+<h6 id="切分字符串"><a href="#切分字符串" class="headerlink" title="切分字符串"></a>切分字符串</h6><p>用正则切分字符串比用固定字符更灵活，正常切分代码这样写：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'a b  c'</span>.split(<span class="string">' '</span>);</span><br><span class="line"><span class="comment">//[ 'a', 'b', '', 'c' ]</span></span><br></pre></td></tr></table></figure></p>
+<p>无法识别连续的空格，用正则：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'a b  c'</span>.split(<span class="regexp">/\s+/</span>);</span><br><span class="line"><span class="comment">//[ 'a', 'b', 'c' ]</span></span><br></pre></td></tr></table></figure></p>
+<p>多少连续空格都可以正常分割，如果<code>,</code>也是分割符号：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'a,b, c  d'</span>.split(<span class="regexp">/[\s\,]+/</span>);</span><br><span class="line"><span class="comment">//[ 'a', 'b', 'c', 'd' ]</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h5><p>正则表达式有提取子串的能力，用<code>()</code>表示的就是要提取的分组(group)。</p>
+<p><code>^(\d{3})-(\d{3,8})</code>分别定义了两个<code>组</code>，可以直接从匹配的字符串中提取出区号和本地号码：</p>
+<figure class="highlight js"><figcaption><span>node.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">var</span> re = <span class="regexp">/^(\d&#123;3&#125;)-(\d&#123;3,8&#125;)$/</span>;</span><br><span class="line"><span class="literal">undefined</span></span><br><span class="line">&gt; re.exec(<span class="string">'010-12345'</span>);</span><br><span class="line">[ <span class="string">'010-12345'</span>, <span class="string">'010'</span>, <span class="string">'12345'</span>, <span class="attr">index</span>: <span class="number">0</span>, <span class="attr">input</span>: <span class="string">'010-12345'</span> ]</span><br><span class="line">&gt; re.exec(<span class="string">'010 12345'</span>);</span><br><span class="line"><span class="literal">null</span></span><br></pre></td></tr></table></figure>
+<div class="note danger"><p>关于<code>&#39;-&#39;</code>符号（称为hyphen或者dash）在RegExp中表示自身’-‘这个符号的时是否需要转义，参考<a href="https://stackoverflow.com/questions/35536590/do-i-need-to-escape-dash-character-in-regex" target="_blank" rel="noopener">Stackoverflow</a>，摘选优秀的回答：</p><p>You only need to escape the dash character if it could otherwise be interpreted as a range indicator (which can be the case inside a character class).</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/-<span class="regexp">/        /</span><span class="regexp">/ matches “-“</span></span><br><span class="line"><span class="regexp">/</span>[a-z]/    <span class="comment">// matches any letter in the range between ASCII a and ASCII z</span></span><br><span class="line">/[a-z]/   <span class="comment">// matches “a”, “-“ or “z”</span></span><br><span class="line">/[a-]/     <span class="comment">// matches “a” or “-“</span></span><br><span class="line">/[-z]/     <span class="comment">// matches “-“ or “z”</span></span><br></pre></td></tr></table></figure></div>
+<p><code>exec()</code>方法在匹配成功以后，会返回一个<code>Array</code>，第一个元素是正则表达式匹配到的整个字符串，后面的字符串表示匹配成功的子串。<br><code>exec()</code>方法在匹配失败返回<code>null</code>。</p>
+<h5 id="贪婪匹配"><a href="#贪婪匹配" class="headerlink" title="贪婪匹配"></a>贪婪匹配</h5><p>正则默认匹配是贪婪匹配，也就是匹配尽可能多的字符，举例如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> re = <span class="regexp">/^(\d+)(0*)$/</span>;</span><br><span class="line"><span class="comment">//[ '102300', '102300', '', index: 0, input: '102300' ]</span></span><br></pre></td></tr></table></figure></p>
+<p>由于\d+采用贪婪匹配，直接把后面的0全部匹配了，结果0*只能匹配空字符串了。</p>
+<p>必须让<code>\d+</code>采用非贪婪匹配（也就是尽可能少匹配），才能把后面的<code>0</code>匹配出来，加个<code>?</code>就可以让<code>\d+</code>采用非贪婪匹配：</p>
+<figure class="highlight js"><figcaption><span>node.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">var</span> re = <span class="regexp">/^(\d+?)(0*)$/</span>;</span><br><span class="line"><span class="literal">undefined</span></span><br><span class="line">&gt; re.exec(<span class="string">'102300'</span>)</span><br><span class="line">[ <span class="string">'102300'</span>, <span class="string">'1023'</span>, <span class="string">'00'</span>, <span class="attr">index</span>: <span class="number">0</span>, <span class="attr">input</span>: <span class="string">'102300'</span> ]</span><br></pre></td></tr></table></figure>
+<h5 id="全局搜索"><a href="#全局搜索" class="headerlink" title="全局搜索"></a>全局搜索</h5><p>JS的正则表达式还有几个特殊的标志，常用的是<code>g</code>，表示全局匹配：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> r1 = <span class="regexp">/test/g</span>;</span><br><span class="line">等价于</span><br><span class="line"><span class="keyword">var</span> r2 = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'test'</span>, <span class="string">'g'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>全局匹配可以多次执行<code>exec()</code>方法来搜索一个匹配的字符串。当我们指定<code>g</code>标志后，每次运行<code>exec()</code>，正则表达式本身会更新<code>lastIndex</code>属性，表示上次匹配到的最后索引：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">'JavaScript, VBScript, JScript and ECMAScript'</span>;</span><br><span class="line"><span class="keyword">var</span> re=<span class="regexp">/[a-zA-Z]+Script/g</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用全局匹配:</span></span><br><span class="line">&gt; re.exec(s);</span><br><span class="line">[ <span class="string">'JavaScript'</span>,</span><br><span class="line">  index: <span class="number">0</span>,</span><br><span class="line">  input: <span class="string">'JavaScript, VBScript, JScript and ECMAScript'</span> ]</span><br><span class="line">&gt; re.lastIndex;</span><br><span class="line"><span class="number">10</span></span><br><span class="line">&gt; re.exec(s); </span><br><span class="line">[ <span class="string">'VBScript'</span>,</span><br><span class="line">  index: <span class="number">12</span>,</span><br><span class="line">  input: <span class="string">'JavaScript, VBScript, JScript and ECMAScript'</span> ]</span><br><span class="line">&gt; re.lastIndex;</span><br><span class="line"><span class="number">20</span></span><br><span class="line">&gt; re.exec(s); </span><br><span class="line">[ <span class="string">'JScript'</span>,</span><br><span class="line">  index: <span class="number">22</span>,</span><br><span class="line">  input: <span class="string">'JavaScript, VBScript, JScript and ECMAScript'</span> ]</span><br><span class="line">&gt; re.lastIndex;</span><br><span class="line"><span class="number">29</span></span><br><span class="line">&gt; re.exec(s); </span><br><span class="line">[ <span class="string">'ECMAScript'</span>,</span><br><span class="line">  index: <span class="number">34</span>,</span><br><span class="line">  input: <span class="string">'JavaScript, VBScript, JScript and ECMAScript'</span> ]</span><br><span class="line">&gt; re.lastIndex;</span><br><span class="line"><span class="number">44</span></span><br><span class="line">&gt; re.exec(s); </span><br><span class="line"><span class="literal">null</span></span><br><span class="line">&gt; re.lastIndex;</span><br><span class="line"><span class="number">0</span></span><br></pre></td></tr></table></figure></p>
+<p>可以看出<code>.exec()</code>方法目前会返回要匹配的字符串在原字符串中的index。</p>
+<p>全局匹配类似搜索，因此不能使用/^…$/，那样只会最多匹配一次。</p>
+<p>正则表达式还可以指定<code>i</code>标志，表示忽略大小写，<code>m</code>标志，表示执行多行匹配。</p>
+<h5 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h5><h6 id="练习1：验证字符串是否是合法的email地址"><a href="#练习1：验证字符串是否是合法的email地址" class="headerlink" title="练习1：验证字符串是否是合法的email地址"></a>练习1：验证字符串是否是合法的email地址</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> re = <span class="regexp">/^[\w\.]+@\w+\.[A-Za-z]+/</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试:</span></span><br><span class="line"><span class="keyword">var</span></span><br><span class="line">    i,</span><br><span class="line">    success = <span class="literal">true</span>,</span><br><span class="line">    should_pass = [<span class="string">'someone@gmail.com'</span>, <span class="string">'bill.gates@microsoft.com'</span>, <span class="string">'tom@voyager.org'</span>, <span class="string">'bob2015@163.com'</span>],</span><br><span class="line">    should_fail = [<span class="string">'test#gmail.com'</span>, <span class="string">'bill@microsoft'</span>, <span class="string">'bill%gates@ms.com'</span>, <span class="string">'@voyager.org'</span>];</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; should_pass.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!re.test(should_pass[i])) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'测试失败: '</span> + should_pass[i]);</span><br><span class="line">        success = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; should_fail.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (re.test(should_fail[i])) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'测试失败: '</span> + should_fail[i]);</span><br><span class="line">        success = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (success) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'测试通过!'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[output]</span><br><span class="line">测试通过!</span><br></pre></td></tr></table></figure>
+<h6 id="练习2：-验证并提取出带名字的Email地址"><a href="#练习2：-验证并提取出带名字的Email地址" class="headerlink" title="练习2： 验证并提取出带名字的Email地址"></a>练习2： 验证并提取出带名字的Email地址</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> re = <span class="regexp">/&lt;(.*?)&gt;\s+([\w\.]+@\w+\.[A-Za-z]+)$/</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试:</span></span><br><span class="line"><span class="keyword">var</span> r = re.exec(<span class="string">'&lt;Tom Paris&gt; tom@voyager.org'</span>);</span><br><span class="line"><span class="keyword">if</span> (r === <span class="literal">null</span> || r.toString() !== [<span class="string">'&lt;Tom Paris&gt; tom@voyager.org'</span>, <span class="string">'Tom Paris'</span>, <span class="string">'tom@voyager.org'</span>].toString()) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'测试失败!'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'测试成功!'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[output]</span><br><span class="line">测试成功!</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/standard-object/" rel="tag"># standard object</a>
+          
+            <a href="/tags/RegExp/" rel="tag"># RegExp</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/JS-standard-object-Date/" rel="next" title="JS笔记| 标准对象| Date">
+                <i class="fa fa-chevron-left"></i> JS笔记| 标准对象| Date
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/JS-OOP-instinct-of-JS/" rel="prev" title="JS笔记| 面向对象编程| 与众不同">
+                JS笔记| 面向对象编程| 与众不同 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">vinson</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">81</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#RegExp"><span class="nav-number">1.</span> <span class="nav-text">RegExp</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#进阶"><span class="nav-number">1.1.</span> <span class="nav-text">进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#切分字符串"><span class="nav-number">1.1.1.</span> <span class="nav-text">切分字符串</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分组"><span class="nav-number">1.2.</span> <span class="nav-text">分组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#贪婪匹配"><span class="nav-number">1.3.</span> <span class="nav-text">贪婪匹配</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#全局搜索"><span class="nav-number">1.4.</span> <span class="nav-text">全局搜索</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#练习"><span class="nav-number">1.5.</span> <span class="nav-text">练习</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#练习1：验证字符串是否是合法的email地址"><span class="nav-number">1.5.1.</span> <span class="nav-text">练习1：验证字符串是否是合法的email地址</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#练习2：-验证并提取出带名字的Email地址"><span class="nav-number">1.5.2.</span> <span class="nav-text">练习2： 验证并提取出带名字的Email地址</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">vinson</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Muse</a> v6.4.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
