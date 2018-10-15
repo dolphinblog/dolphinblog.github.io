@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="操作DOM DOM是Document Object Model的缩写。 HTML文档是一棵DOM树。可通过JS操作DOM，改变HTML的结构。">
+<meta name="keywords" content="DOM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS笔记| 操作DOM">
+<meta property="og:url" content="http://yoursite.com/2018/02/10/JS-DOM-manipulation/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="操作DOM DOM是Document Object Model的缩写。 HTML文档是一棵DOM树。可通过JS操作DOM，改变HTML的结构。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-04-06T11:13:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS笔记| 操作DOM">
+<meta name="twitter:description" content="操作DOM DOM是Document Object Model的缩写。 HTML文档是一棵DOM树。可通过JS操作DOM，改变HTML的结构。">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/10/JS-DOM-manipulation/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>JS笔记| 操作DOM | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/10/JS-DOM-manipulation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="vinson">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JS笔记| 操作DOM
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-02-10 20:08:49" itemprop="dateCreated datePublished" datetime="2018-02-10T20:08:49+08:00">2018-02-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-04-06 19:13:32" itemprop="dateModified" datetime="2018-04-06T19:13:32+08:00">2018-04-06</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JS/" itemprop="url" rel="index"><span itemprop="name">JS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/001434499851683f7f8d6b7717343248a75d5e7f930def4000" target="_blank" rel="noopener">操作DOM</a></p>
+<p>DOM是Document Object Model的缩写。</p>
+<p>HTML文档是一棵DOM树。可通过JS操作DOM，改变HTML的结构。</p>
+<a id="more"></a>
+<p>操作一个DOM节点实际上只有这么几种操作：</p>
+<ul>
+<li>遍历。遍历该DOM节点下的子节点，以便进行相应操作。</li>
+<li>更新。更新该DOM节点的内容，即更新该DOM节点表示的HTML的内容。</li>
+<li>添加。在该节点下面新增一个子节点，相当于动态增加了一个HTML节点。</li>
+<li>删除。将该节点从DOM树中删除，相当于从HTML中删除。</li>
+</ul>
+<p>操作一个DOM节点之前，需要先拿到这个节点。最常用的方法是<code>document.getElementById()</code> <code>document.getElementByTagName()</code>，以及css选择器<code>document.getElementByClassName()</code>。</p>
+<p>由于ID在HTML文档种是唯一的，所以<code>document.getElementByID()</code>可以直接定位唯一的一个DOM节点。<code>document.getElementByTagName()</code>和<code>document.getElementsByClassName()</code>总是返回一组DOM节点。</p>
+<p>要精确选择DOM节点，可以先定位父节点，再从父节点开始选择，以缩小范围，例如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回ID为'test'的节点：</span></span><br><span class="line"><span class="keyword">var</span> test = <span class="built_in">document</span>.getElementById(<span class="string">'test'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//先定位ID为`test-talbe`的节点，然后返回其内部所有tr节点：</span></span><br><span class="line"><span class="keyword">var</span> trs = <span class="built_in">document</span>.getElementById(<span class="string">'test-table'</span>).getElementByTagName(<span class="string">'tr'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 先定位ID为'test-div'的节点，再返回其内部所有class包含red的节点：</span></span><br><span class="line"><span class="keyword">var</span> reds = <span class="built_in">document</span>.getElementById(<span class="string">'test-div'</span>).getElementsByClassName(<span class="string">'red'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取节点test下的所有直属子节点:</span></span><br><span class="line"><span class="keyword">var</span> cs = test.children;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取节点test下第一个、最后一个子节点：</span></span><br><span class="line"><span class="keyword">var</span> first = test.firstElementChild;</span><br><span class="line"><span class="keyword">var</span> last = test.lastElementChild;</span><br></pre></td></tr></table></figure></p>
+<p>第二种方法是使用<code>querySelector()</code>和<code>querySelectorAll()</code>，需要了解selector语法，然后使用条件来获取节点，更加方便：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过querySelector获取ID为q1的节点：</span></span><br><span class="line"><span class="keyword">var</span> q1 = <span class="built_in">document</span>.querySelector(<span class="string">'#q1'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过querySelectorAll获取q1节点内的符合条件的所有节点：</span></span><br><span class="line"><span class="keyword">var</span> ps = q1.querySelectorAll(<span class="string">'div.highlighted &gt; p'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>严格地讲，我们这里的DOM节点是指Element，但是DOM节点实际上是Node，在HTML中，Node包括<code>Element</code>、<code>Comment</code>、<code>CDATA_SECTION</code>等很多种，以及根节点Document类型，但是，绝大多数时候我们只关心Element，也就是实际控制页面结构的Node，其他类型的Node忽略即可。根节点Document已经自动绑定为全局变量document。</p>
+<p><strong>练习</strong></p>
+<p>如下的HTML结构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">JavaScript</span><br><span class="line"></span><br><span class="line">Java</span><br><span class="line"></span><br><span class="line">Python</span><br><span class="line"></span><br><span class="line">Ruby</span><br><span class="line"></span><br><span class="line">Swift</span><br><span class="line"></span><br><span class="line">Scheme</span><br><span class="line"></span><br><span class="line">Haskell</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- HTML结构 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"test-div"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"c-red"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"test-p"</span>&gt;</span>JavaScript<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Java<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"c-red c-green"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Python<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Ruby<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Swift<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"c-green"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Scheme<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Haskell<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>请选择出指定条件的节点：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 选择&lt;p&gt;JavaScript&lt;/p&gt;:</span></span><br><span class="line"><span class="keyword">var</span> js = <span class="built_in">document</span>.getElementById(<span class="string">'test-p'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 选择&lt;p&gt;Python&lt;/p&gt;,&lt;p&gt;Ruby&lt;/p&gt;,&lt;p&gt;Swift&lt;/p&gt;:</span></span><br><span class="line"><span class="keyword">var</span> arr = <span class="built_in">document</span>.getElementsByClassName(<span class="string">'c-red c-green'</span>)[<span class="number">0</span>].children;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 选择&lt;p&gt;Haskell&lt;/p&gt;:</span></span><br><span class="line"><span class="keyword">var</span> haskell = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"c-green"</span>)[<span class="number">1</span>].lastElementChild;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试:</span></span><br><span class="line"><span class="keyword">if</span> (!js || js.innerText !== <span class="string">'JavaScript'</span>) &#123;</span><br><span class="line">    alert(<span class="string">'选择JavaScript失败!'</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (!arr || arr.length !== <span class="number">3</span> || !arr[<span class="number">0</span>] || !arr[<span class="number">1</span>] || !arr[<span class="number">2</span>] || arr[<span class="number">0</span>].innerText !== <span class="string">'Python'</span> || arr[<span class="number">1</span>].innerText !== <span class="string">'Ruby'</span> || arr[<span class="number">2</span>].innerText !== <span class="string">'Swift'</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'选择Python,Ruby,Swift失败!'</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (!haskell || haskell.innerText !== <span class="string">'Haskell'</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'选择Haskell失败!'</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'测试通过!'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重点在于<code>class=&quot;c-red c-green&quot;</code>的含义是该节点的类既是<code>c-red</code>又是<code>c-green</code>，获取目标节点要写对索引数字。</p>
+<h4 id="更新DOM"><a href="#更新DOM" class="headerlink" title="更新DOM"></a>更新DOM</h4><p>拿到一个DOM节点以后，可以对它进行更新。</p>
+<p>可以直接修改节点的文本，方法有两种：</p>
+<h5 id="1-修改innerHTML属性。"><a href="#1-修改innerHTML属性。" class="headerlink" title="1. 修改innerHTML属性。"></a>1. 修改<code>innerHTML</code>属性。</h5><p>这种方式很强大，不但可以修改DOM节点的文本内容，而且可以修改DOM节点内部的子树。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取节点&lt;p id="p-id"&gt;...&lt;/p&gt;</span></span><br><span class="line"><span class="keyword">var</span> p = <span class="built_in">document</span>.getElementById(<span class="string">'p-id'</span>);</span><br><span class="line"><span class="comment">//修改节点为&lt;p id="p-id"&gt;ABC&lt;/p&gt;</span></span><br><span class="line">p.innerHTML = <span class="string">'ABC'</span>; </span><br><span class="line"><span class="comment">//增加子节点</span></span><br><span class="line">p.innerHTML = <span class="string">'ABC&lt;span style="color:red"&gt;RED&lt;/span&gt;XYZ'</span>;</span><br></pre></td></tr></table></figure>
+<div class="note info"><p><code>innerHTML</code>可修改HTML，出于安全原因应谨慎使用。</p></div>
+<h5 id="2-修改innerText或textContent属性。"><a href="#2-修改innerText或textContent属性。" class="headerlink" title="2. 修改innerText或textContent属性。"></a>2. 修改<code>innerText</code>或<code>textContent</code>属性。</h5><p>举例如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取p节点</span></span><br><span class="line"><span class="keyword">var</span> p = <span class="built_in">document</span>.getElementById(<span class="string">'p-id'</span>);</span><br><span class="line"><span class="comment">//设置文本</span></span><br><span class="line">p.innerText = <span class="string">'&lt;script&gt;alert('</span>Hi<span class="string">')&lt;/script&gt;'</span>;</span><br><span class="line"><span class="comment">//HTML标签被编码，无法设置&lt;script&gt;节点</span></span><br></pre></td></tr></table></figure></p>
+<p><code>innerText</code>和<code>textContent</code>的区别是，使用二者读取节点文本时，innerText不返回隐藏元素的文本，而textContent返回所有文本。另外注意IE&lt;9不支持textContent。</p>
+<p>修改节点的CSS可用<code>style</code>属性。<br>举例：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p = <span class="built_in">document</span>.getElementById(<span class="string">'p-id'</span>);</span><br><span class="line">p.style.color = <span class="string">'#dddddd'</span>;</span><br><span class="line">p.style.fontSize = <span class="string">'20px'</span>;</span><br><span class="line">p.style.paddingTop = <span class="string">'2em'</span>;</span><br></pre></td></tr></table></figure></p>
+<div class="note info"><p>因为CSS允许font-size这样的名称，但它并非JavaScript有效的属性名，所以需要在JavaScript中改写为驼峰式命名fontSize</p></div>
+<h4 id="插入DOM"><a href="#插入DOM" class="headerlink" title="插入DOM"></a>插入DOM</h4><p>获得了一个节点之后，想在这个节点内插入新的节点，怎么做？</p>
+<p>如果这个DOM节点是空的，例如，<code>&lt;div&gt;&lt;/div&gt;</code>，那么，直接使用<code>innerHTML = &#39;&lt;span&gt;child&lt;/span&gt;&#39;</code>就可以修改DOM节点的内容，相当于“插入”了新的DOM节点。</p>
+<p>如果DOM节点不是空的，innerHTML会直接替换掉原来的所有子节点，所以不能直接这么写。</p>
+<p>这时有两种插入子节点的方式。</p>
+<h5 id="1-使用appendChild"><a href="#1-使用appendChild" class="headerlink" title="1. 使用appendChild"></a>1. 使用<code>appendChild</code></h5><p>看例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"js"</span>&gt;</span>JavaScript<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"list"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"java"</span>&gt;</span>Java<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"python"</span>&gt;</span>Python<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"scheme"</span>&gt;</span>Scheme<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>&lt;div id=&quot;list&quot;&gt;</code>再添加一个子节点：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span></span><br><span class="line">  js = <span class="built_in">document</span>.getElementById(<span class="string">'js'</span>),</span><br><span class="line">  list = <span class="built_in">document</span>.getElementById(<span class="string">'list'</span>);</span><br><span class="line">list.appendChild(js);</span><br></pre></td></tr></table></figure>
+<p>现在HTML结构变成了这样：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"list"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"java"</span>&gt;</span>Java<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"python"</span>&gt;</span>Python<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"scheme"</span>&gt;</span>Scheme<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"js"</span>&gt;</span>JavaScript<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>注意：因为我们插入的js节点已经存在于当前的文档树，因此这个节点首先会从原先的位置删除，再插入到新的位置。</p>
+<p>更多的时候，我们从零开始创建节点，然后插入到指定位置：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> </span><br><span class="line">  list = <span class="built_in">document</span>.getElementById(<span class="string">'list'</span>),</span><br><span class="line">  haskell = <span class="built_in">document</span>.createElement(<span class="string">'p'</span>);</span><br><span class="line">haskell.id = <span class="string">'haskell'</span>;</span><br><span class="line">haskell.innerText = <span class="string">'Haskell'</span>;</span><br><span class="line">list.appendChild(haskell);</span><br></pre></td></tr></table></figure></p>
+<p>现在HTML结构：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"list"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"java"</span>&gt;</span>Java<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"python"</span>&gt;</span>Python<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"scheme"</span>&gt;</span>Scheme<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"haskell"</span>&gt;</span>Haskell<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>动态创建一个节点然后添加到DOM树中，可以实现很多功能。举个例子，下面的代码动态创建了一个<code>&lt;style&gt;</code>节点，然后把它添加到<code>&lt;head&gt;</code>节点的末尾，这样就动态地给文档添加了新的CSS定义：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> d = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">d.setAttribute(<span class="string">'type'</span>, <span class="string">'text/css'</span>);</span><br><span class="line">d.innerHTML = <span class="string">'p &#123; color: red &#125;'</span>;</span><br><span class="line"><span class="built_in">document</span>.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>].appendChild(d);</span><br></pre></td></tr></table></figure></p>
+<p>在Chrome的控制台执行上述代码，页面变红。（所有p标签里面的文本内容变为红色）</p>
+<h5 id="2-使用insertBefore"><a href="#2-使用insertBefore" class="headerlink" title="2. 使用insertBefore"></a>2. 使用<code>insertBefore</code></h5><p>使用<code>parentElement.insertBefore(newElement, referenceElement);</code>，子节点会插入到<code>referenceElement</code>之前。</p>
+<p>假定我们要把Haskell插入到Python之前：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"list"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"java"</span>&gt;</span>Java<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"python"</span>&gt;</span>Python<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"scheme"</span>&gt;</span>Scheme<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>可以这么写：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list = <span class="built_in">document</span>.getElementById(<span class="string">'list'</span>);</span><br><span class="line"><span class="keyword">var</span> ref = list.getElementById(<span class="string">'python'</span>);</span><br><span class="line"><span class="keyword">var</span> haskell = <span class="built_in">document</span>.createElement(<span class="string">'p'</span>);</span><br><span class="line">haskell.id = <span class="string">'haskell'</span>;</span><br><span class="line">haskell.innerText = <span class="string">'Haskell'</span>;</span><br><span class="line">list.insertBefore(haskell, ref);</span><br></pre></td></tr></table></figure></p>
+<p>新的HTML结构如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"list"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"java"</span>&gt;</span>Java<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"haskell"</span>&gt;</span>Haskell<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"python"</span>&gt;</span>Python<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"scheme"</span>&gt;</span>Scheme<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>总结，使用<code>insertBefore</code>需要注意：</p>
+<ol>
+<li>要拿到一个“参考子节点”的引用。</li>
+<li>要在父节点上使用该属性。</li>
+</ol>
+<p>循环一个父节点的所有子节点，可以通过迭代children属性实现：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span></span><br><span class="line">    i, c,</span><br><span class="line">    list = <span class="built_in">document</span>.getElementById(<span class="string">'list'</span>);</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; list.children.length; i++) &#123;</span><br><span class="line">    cosole.log(list.children[i]); <span class="comment">// 拿到第i个子节点</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h5><p>对于一个已有的HTML结构：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ol</span> <span class="attr">id</span>=<span class="string">"test-list"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"lang"</span>&gt;</span>Scheme<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"lang"</span>&gt;</span>JavaScript<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"lang"</span>&gt;</span>Python<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"lang"</span>&gt;</span>Ruby<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"lang"</span>&gt;</span>Haskell<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>按字符串顺序重新排序DOM节点：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//一种解法：</span></span><br><span class="line"><span class="keyword">var</span> arr = <span class="built_in">document</span>.getElementsByClassName(<span class="string">'lang'</span>);</span><br><span class="line"><span class="keyword">var</span> lang = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">  lang.push(arr[i].innerHTML);</span><br><span class="line">&#125;</span><br><span class="line">lang.sort();</span><br><span class="line">lang.forEach(<span class="function">(<span class="params">x, i</span>) =&gt;</span> arr[i].innerHTML = x);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试:</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span></span><br><span class="line">        arr, i,</span><br><span class="line">        t = <span class="built_in">document</span>.getElementById(<span class="string">'test-list'</span>);</span><br><span class="line">    <span class="keyword">if</span> (t &amp;&amp; t.children &amp;&amp; t.children.length === <span class="number">5</span>) &#123;</span><br><span class="line">        arr = [];</span><br><span class="line">        <span class="keyword">for</span> (i=<span class="number">0</span>; i&lt;t.children.length; i++) &#123;</span><br><span class="line">            arr.push(t.children[i].innerText);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (arr.toString() === [<span class="string">'Haskell'</span>, <span class="string">'JavaScript'</span>, <span class="string">'Python'</span>, <span class="string">'Ruby'</span>, <span class="string">'Scheme'</span>].toString()) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'测试通过!'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'测试失败: '</span> + arr.toString());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'测试失败!'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+<h4 id="删除DOM"><a href="#删除DOM" class="headerlink" title="删除DOM"></a>删除DOM</h4><p>删除一个DOM节点要较简单一些。首先获取该节点本身和其父节点，然后调用父节点的<code>removeChild</code>方法删掉该节点。</p>
+<p>举例如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> self = <span class="built_in">document</span>.getElementById(<span class="string">'to-be-removed'</span>);</span><br><span class="line"><span class="keyword">var</span> parent = self.parentElement;</span><br><span class="line"><span class="keyword">var</span> removed = parent.removeChild(self);</span><br><span class="line">removed === self; <span class="comment">//true</span></span><br></pre></td></tr></table></figure></p>
+<p>注意：删除后的节点虽然不在文档树中了，但是它还在内存中，可以再被添加到别的位置。</p>
+<h5 id="实时更新的children"><a href="#实时更新的children" class="headerlink" title="实时更新的children"></a>实时更新的<code>children</code></h5><p>前面几次用到的<code>children</code>属性是一个只读属性，并且它在子节点变化时会即时变化。</p>
+<p>例如，对于如下HTML结构：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>First<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Second<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果这样删除子节点：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> parent = <span class="built_in">document</span>.getElementById(<span class="string">'parent'</span>);</span><br><span class="line">parent.removeChild(parent.children[<span class="number">0</span>]);</span><br><span class="line">parent.removeChild(parent.children[<span class="number">1</span>]); <span class="comment">//报错！</span></span><br></pre></td></tr></table></figure>
+<p>在删除第二个子节点时会报错，原因在于删除第一个子节点以后，就只剩下一个子节点了，<code>children</code>实时更新，自然不存在<code>children[1]</code>了。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DOM/" rel="tag"># DOM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/10/JS-browser/" rel="next" title="JS笔记| 浏览器">
+                <i class="fa fa-chevron-left"></i> JS笔记| 浏览器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/23/JS-form-manipulation/" rel="prev" title="JS笔记| 操作表单">
+                JS笔记| 操作表单 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">vinson</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">81</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#更新DOM"><span class="nav-number">1.</span> <span class="nav-text">更新DOM</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-修改innerHTML属性。"><span class="nav-number">1.1.</span> <span class="nav-text">1. 修改innerHTML属性。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-修改innerText或textContent属性。"><span class="nav-number">1.2.</span> <span class="nav-text">2. 修改innerText或textContent属性。</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入DOM"><span class="nav-number">2.</span> <span class="nav-text">插入DOM</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-使用appendChild"><span class="nav-number">2.1.</span> <span class="nav-text">1. 使用appendChild</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-使用insertBefore"><span class="nav-number">2.2.</span> <span class="nav-text">2. 使用insertBefore</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#练习"><span class="nav-number">2.3.</span> <span class="nav-text">练习</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除DOM"><span class="nav-number">3.</span> <span class="nav-text">删除DOM</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#实时更新的children"><span class="nav-number">3.1.</span> <span class="nav-text">实时更新的children</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">vinson</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Muse</a> v6.4.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

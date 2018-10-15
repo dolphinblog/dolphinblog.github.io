@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1.基本语法2.数据类型和变量  基本语法和C语言相同：每个语句以;结束，语句块用{……} 1234567891011var x = 1; //一个完整的赋值语句 &apos;hello, world&apos;; //这行代码是一个字符串，但仍然是一个完整的语句 var x = 1; var y = 2; //不建议一行写多个语句 if (2&amp;gt;1) &amp;#123;     x = 1;     y = 2;">
+<meta name="keywords" content="basic grammar,data type,variable">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS笔记| 基本语法| 数据类型| 变量">
+<meta property="og:url" content="http://yoursite.com/2018/01/06/JS-basics-datatype-variable/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.基本语法2.数据类型和变量  基本语法和C语言相同：每个语句以;结束，语句块用{……} 1234567891011var x = 1; //一个完整的赋值语句 &apos;hello, world&apos;; //这行代码是一个字符串，但仍然是一个完整的语句 var x = 1; var y = 2; //不建议一行写多个语句 if (2&amp;gt;1) &amp;#123;     x = 1;     y = 2;">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-04-06T11:13:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS笔记| 基本语法| 数据类型| 变量">
+<meta name="twitter:description" content="1.基本语法2.数据类型和变量  基本语法和C语言相同：每个语句以;结束，语句块用{……} 1234567891011var x = 1; //一个完整的赋值语句 &apos;hello, world&apos;; //这行代码是一个字符串，但仍然是一个完整的语句 var x = 1; var y = 2; //不建议一行写多个语句 if (2&amp;gt;1) &amp;#123;     x = 1;     y = 2;">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/06/JS-basics-datatype-variable/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>JS笔记| 基本语法| 数据类型| 变量 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/06/JS-basics-datatype-variable/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="vinson">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JS笔记| 基本语法| 数据类型| 变量
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-01-06 12:07:30" itemprop="dateCreated datePublished" datetime="2018-01-06T12:07:30+08:00">2018-01-06</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-04-06 19:13:32" itemprop="dateModified" datetime="2018-04-06T19:13:32+08:00">2018-04-06</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JS/" itemprop="url" rel="index"><span itemprop="name">JS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote class="blockquote-center"><p>1.<a href="https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/00143470025281435e4e03117a74438aaf98c4f7b30b307000" target="_blank" rel="noopener">基本语法</a><br>2.<a href="https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/001434499190108eec0bdf14e704a09935cd112e501e31a000" target="_blank" rel="noopener">数据类型和变量</a></p>
+</blockquote>
+<h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><p>和C语言相同：每个语句以<code>;</code>结束，语句块用<code>{……}</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">1</span>; <span class="comment">//一个完整的赋值语句 </span></span><br><span class="line"></span><br><span class="line"><span class="string">'hello, world'</span>; <span class="comment">//这行代码是一个字符串，但仍然是一个完整的语句 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> x = <span class="number">1</span>; <span class="keyword">var</span> y = <span class="number">2</span>; <span class="comment">//不建议一行写多个语句 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="number">2</span>&gt;<span class="number">1</span>) &#123; </span><br><span class="line">    x = <span class="number">1</span>; </span><br><span class="line">    y = <span class="number">2</span>; </span><br><span class="line">    z = <span class="number">3</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><h4 id="Number"><a href="#Number" class="headerlink" title="Number"></a><code>Number</code></h4><p>JavaScript不区分整数和浮点数，统一用Number表示，这些都是合法的Number类型：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">123</span>;</span><br><span class="line"><span class="number">0.45</span>;</span><br><span class="line"><span class="number">1.2e3</span>;</span><br><span class="line"><span class="number">-99</span>;</span><br><span class="line"><span class="literal">NaN</span>; <span class="comment">//表示Not a Number，当无法计算结果时用NaN表示</span></span><br><span class="line"><span class="literal">Infinity</span>; <span class="comment">//表示无限大，超出了Number能表示的最大值</span></span><br></pre></td></tr></table></figure>
+<p>JS支持16进制，十六进制用0x前缀和0-9，a-f表示，例如：<code>0xff00</code>，<code>0xa5b4c3d2</code>等，他们和相应十进制表示的数值完全一样。</p>
+<p>Number类型可直接做四则运算。</p>
+<h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a><code>字符串</code></h4><p>字符串是以单引号<code>&#39;</code>或双引号<code>&quot;</code>括起来的任意文本。</p>
+<h4 id="布尔值"><a href="#布尔值" class="headerlink" title="布尔值"></a><code>布尔值</code></h4><p>两个值：<code>true</code>和<code>false</code></p>
+<ol>
+<li><p>逻辑运算符<br>参考C语言，有<code>&amp;&amp;</code>，<code>||</code>，<code>!</code>等</p>
+</li>
+<li><p>比较运算符<br>参考C语言，有<code>&gt;</code> <code>&gt;</code> <code>=</code>  <code>==</code> <code>!=</code>等</p>
+</li>
+</ol>
+<div class="note warning"><p>要特别注意<code>==</code>，JS中有两个用于<code>比较是否相等</code>的运算符：</p><ol><li><code>==</code>比较，会自动转换数据类型再比较</li><li><code>===</code>比较，不会转换数据类型，如果数据类型不同，直接返回false，如果一致，再进一步比较。</li></ol><p>应当总是始终使用<code>===</code>。</p></div>
+<h4 id="NaN"><a href="#NaN" class="headerlink" title="NaN"></a><code>NaN</code></h4><p><code>NaN</code>这个特殊的Number与所有值都不相等，包括<code>NaN</code>自己。<br>判断NaN的方法是通过<code>isNaN()</code>函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">isNaN</span>(<span class="literal">NaN</span>); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<h4 id="null和undefined"><a href="#null和undefined" class="headerlink" title="null和undefined"></a><code>null和undefined</code></h4><p><code>null</code>表示一个“空”的值，它和<code>0</code> <code>&#39;&#39;</code>不同，0是一个数值，<code>&#39;&#39;</code>是长度为0的字符串，而<code>null</code>表示”空”</p>
+<p>null相当于Python中的<code>None</code></p>
+<p>在JS中还有一个<code>undefined</code>，表示未定义，区分null和undefined二者的意义不大，大多数情况下应该使用null，undefined仅仅在判断函数参数是否传递的时候有用。</p>
+<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a><code>数组</code></h4><p>用<code>[]</code>的形式表示，有顺序，数组中的每个值称为元素，一个数组可以包含任意数据类型，比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3.14</span>, <span class="string">'hello'</span>, <span class="literal">null</span>, <span class="literal">true</span>]</span><br></pre></td></tr></table></figure>
+<p>还可以通过<code>Array()</code>函数创建数据：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>) <span class="comment">//[1,2,3]</span></span><br></pre></td></tr></table></figure></p>
+<p>建议使用<code>[]</code></p>
+<p>和Python一样，数组索引从<code>0</code>开始</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3.14</span>, <span class="string">'Hello'</span>, <span class="literal">null</span>, <span class="literal">true</span>];</span><br><span class="line">arr[<span class="number">0</span>]; <span class="comment">// 返回索引为0的元素，即1</span></span><br><span class="line">arr[<span class="number">5</span>]; <span class="comment">// 返回索引为5的元素，即true</span></span><br><span class="line">arr[<span class="number">6</span>]; <span class="comment">// 索引超出了范围，返回undefined</span></span><br></pre></td></tr></table></figure>
+<h4 id="对象"><a href="#对象" class="headerlink" title="对象"></a><code>对象</code></h4><p>JS的对象是键值对的<code>无序</code>集合，例如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">    name: <span class="string">'Bob'</span>,</span><br><span class="line">    age: <span class="number">20</span>,</span><br><span class="line">    tags: [<span class="string">'js'</span>, <span class="string">'web'</span>, <span class="string">'mobile'</span>],</span><br><span class="line">    city: <span class="string">'Beijing'</span>,</span><br><span class="line">    hasCar: <span class="literal">true</span>,</span><br><span class="line">    zipcode: <span class="literal">null</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p><code>key</code>都是字符串，<code>value</code>可以是任意数据类型，key又被称为对象的属性。</p>
+<p>通过<code>obj.key</code>的方式获取对象属性：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">person.name; <span class="comment">//Bob</span></span><br><span class="line">person.zipcdoe; <span class="comment">//null</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a><code>变量</code></h4><p>JS中的变量名是<code>英文</code>、<code>数字</code>、<code>$</code>和<code>_</code>的组合，不能以数字开头。变量命不能是JS的关键字。</p>
+<p>申明变量用var关键字：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a;</span><br><span class="line"><span class="keyword">var</span> $b = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">var</span> s_007= <span class="literal">null</span>;</span><br></pre></td></tr></table></figure></p>
+<p>变量明可以用中文，但是不建议使用。</p>
+<p>变量没有类型，可以任意赋值。</p>
+<p>要显示变量的内容，可以用<code>console.log()</code>，打开Chrome的控制台就可以看到结果。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="string">'100 hundreds miles'</span></span><br><span class="line"><span class="built_in">console</span>.log(x)</span><br></pre></td></tr></table></figure>
+<p>使用console.log()代替<code>alert()</code>的好处是可以避免弹出对话框</p>
+<h4 id="strict模式"><a href="#strict模式" class="headerlink" title="strict模式"></a><code>strict模式</code></h4><p>不用<code>var</code>关键字直接声明变量，比如<code>i = 200</code>，那么<code>i</code>默认就是全局变量。</p>
+<div class="note danger"><p>在同一个页面的不同JS文件中，如果都不用var申明，并恰好都使用了变量i，将造成变量i相互影响，从而难以调试错误结果。</p></div>
+<p>为了修复这一问题，ECMA在JS后续规范中推出<code>strict</code>模式，在strict模式运行下的JS代码，必须使用var申明变量，否则将导致运行错误。</p>
+<p>启用strict模式的方法是在JS代码的第一行写上：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span></span><br></pre></td></tr></table></figure></p>
+<p>这是一个字符串，不支持strict模式的浏览器会把它当做一个字符串语句执行，支持strict模式的浏览器将开启strict模式运行JavaScript。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/basic-grammar/" rel="tag"># basic grammar</a>
+          
+            <a href="/tags/data-type/" rel="tag"># data type</a>
+          
+            <a href="/tags/variable/" rel="tag"># variable</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/30/assign-meaning-to-life/" rel="next" title="赋予时光以意义">
+                <i class="fa fa-chevron-left"></i> 赋予时光以意义
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/07/JS-string-detail/" rel="prev" title="JS笔记| 字符串详解">
+                JS笔记| 字符串详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">vinson</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">81</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本语法"><span class="nav-number">1.</span> <span class="nav-text">基本语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-number">2.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Number"><span class="nav-number">2.1.</span> <span class="nav-text">Number</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串"><span class="nav-number">2.2.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#布尔值"><span class="nav-number">2.3.</span> <span class="nav-text">布尔值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NaN"><span class="nav-number">2.4.</span> <span class="nav-text">NaN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null和undefined"><span class="nav-number">2.5.</span> <span class="nav-text">null和undefined</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组"><span class="nav-number">2.6.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象"><span class="nav-number">2.7.</span> <span class="nav-text">对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变量"><span class="nav-number">2.8.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#strict模式"><span class="nav-number">2.9.</span> <span class="nav-text">strict模式</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">vinson</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Muse</a> v6.4.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

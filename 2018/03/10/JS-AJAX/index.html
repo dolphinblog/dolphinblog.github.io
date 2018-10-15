@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="AJAX不是JS规范, 它只是一个哥们”发明”的缩写: Asynchronous JavaScript and XML, 意思就是用JS执行异步网络请求.">
+<meta name="keywords" content="AJAX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS笔记| AJAX">
+<meta property="og:url" content="http://yoursite.com/2018/03/10/JS-AJAX/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="AJAX不是JS规范, 它只是一个哥们”发明”的缩写: Asynchronous JavaScript and XML, 意思就是用JS执行异步网络请求.">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/005BEzjegy1fpid6b15kej30gi05zwem.jpg">
+<meta property="og:updated_time" content="2018-04-06T11:13:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS笔记| AJAX">
+<meta name="twitter:description" content="AJAX不是JS规范, 它只是一个哥们”发明”的缩写: Asynchronous JavaScript and XML, 意思就是用JS执行异步网络请求.">
+<meta name="twitter:image" content="https://wx3.sinaimg.cn/mw690/005BEzjegy1fpid6b15kej30gi05zwem.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/10/JS-AJAX/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>JS笔记| AJAX | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/10/JS-AJAX/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="vinson">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JS笔记| AJAX
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-03-10 00:36:08" itemprop="dateCreated datePublished" datetime="2018-03-10T00:36:08+08:00">2018-03-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-04-06 19:13:32" itemprop="dateModified" datetime="2018-04-06T19:13:32+08:00">2018-04-06</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JS/" itemprop="url" rel="index"><span itemprop="name">JS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>AJAX不是JS规范, 它只是一个哥们”发明”的缩写: <code>Asynchronous JavaScript and XML</code>, 意思就是用JS执行异步网络请求.</p>
+<a id="more"></a>
+<blockquote>
+<p>如果仔细观察一个Form的提交, 你就会发现, 一旦用户点击“Submit”按钮, 表单开始提交, 浏览器就会刷新页面, 然后在新页面里告诉你操作是成功了还是失败了.如果不幸由于网络太慢或者其他原因, 就会得到一个404页面.这就是Web的运作原理：一次HTTP请求对应一个页面.</p>
+</blockquote>
+<p>如果要让用户留在当前页面中, 同时发出新的HTTP请求, 就必须用JavaScript发送这个新请求, 接收到数据后, 再用JavaScript更新页面, 这样一来, 用户就感觉自己仍然停留在当前页面, 但是数据却可以不断地更新.</p>
+<p>最早大规模使用AJAX的就是<code>Gmail</code>, Gmail的页面在首次加载后, 剩下的所有数据都依赖于AJAX来更新.</p>
+<p>用JavaScript写一个完整的AJAX代码并不复杂, 但是需要注意：AJAX请求是<code>异步</code>执行的, 也就是说, 要通过回调函数获得响应.</p>
+<p>在现代浏览器上写AJAX主要依靠XMLHttpRequest对象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">success</span>(<span class="params">text</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> textarea = <span class="built_in">document</span>.getElementById(<span class="string">'test-response-text'</span>);</span><br><span class="line">    textarea.value = text;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fail</span>(<span class="params">code</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> textarea = <span class="built_in">document</span>.getElementById(<span class="string">'test-response-text'</span>);</span><br><span class="line">    textarea.value = <span class="string">'Error code: '</span> + code;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest(); <span class="comment">// 新建XMLHttpRequest对象</span></span><br><span class="line"></span><br><span class="line">request.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="comment">// 状态发生变化时, 函数被回调</span></span><br><span class="line">    <span class="keyword">if</span> (request.readyState === <span class="number">4</span>) &#123; <span class="comment">// 成功完成</span></span><br><span class="line">        <span class="comment">// 判断响应结果:</span></span><br><span class="line">        <span class="keyword">if</span> (request.status === <span class="number">200</span>) &#123;</span><br><span class="line">            <span class="comment">// 成功, 通过responseText拿到响应的文本:</span></span><br><span class="line">            <span class="keyword">return</span> success(request.responseText);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 失败, 根据响应码判断失败原因:</span></span><br><span class="line">            <span class="keyword">return</span> fail(request.status);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// HTTP请求还在继续...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送请求:</span></span><br><span class="line">request.open(<span class="string">'GET'</span>, <span class="string">'/api/categories'</span>);</span><br><span class="line">request.send(); <span class="comment">//GET方法不需要传入参数</span></span><br><span class="line"></span><br><span class="line">alert(<span class="string">'请求已发送, 请等待响应...'</span>);</span><br></pre></td></tr></table></figure>
+<p>注意<code>XMLHttpRequest</code> <code>request</code> <code>request.onreadystatechange()</code> <code>request.readyState</code> <code>request.status</code> <code>request.responseText</code> 这些东西是什么.</p>
+<p>当创建了XMLHttpRequest对象后, 要先设置onreadystatechange的回调函数.在回调函数中, 通常我们只需通过readyState === 4判断请求是否完成, 如果已完成, 再根据status === 200判断是否是一个成功的响应.</p>
+<p>XMLHttpRequest对象的open()方法有3个参数, 第一个参数指定是GET还是POST, 第二个参数指定URL地址, 第三个参数指定是否使用异步, 默认是true, 所以不用写.</p>
+<p>注意, 千万不要把第三个参数指定为false, 否则浏览器将停止响应, 直到AJAX请求完成.如果这个请求耗时10秒, 那么10秒内你会发现浏览器处于“假死”状态.</p>
+<p>最后调用send()方法才真正发送请求.GET请求不需要参数, POST请求需要把body部分以字符串或者FormData对象传进去.</p>
+<p>对于上面的AJAX代码, 如果要作用于低版本IE, <code>XMLHttpRequest</code>需要替换为<code>ActiveXObject(&#39;Microsoft.XMLHTTP&#39;)</code>,兼容IE的写法是:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> request;</span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.XMLHttpRequest) &#123;</span><br><span class="line">    request = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    request = <span class="keyword">new</span> ActiveXObject(<span class="string">'Microsoft.XMLHTTP'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过检测window对象是否有XMLHttpRequest属性来确定浏览器是否支持标准的XMLHttpRequest.注意, 不要根据浏览器的navigator.userAgent来检测浏览器是否支持某个JavaScript特性, 一是因为这个字符串本身可以伪造, 二是通过IE版本判断JavaScript特性将非常复杂.</p>
+<h4 id="安全限制"><a href="#安全限制" class="headerlink" title="安全限制"></a>安全限制</h4><p>上面异步请求的语句是<code>request.open(&#39;GET&#39;, &#39;/api/categories&#39;);</code>, 其中<code>&#39;/api/categories&#39;</code>是相对路径, 如果把它改为<code>http://www.sina.com.cn/</code>肯定会报错.</p>
+<p>这是浏览器的同源策略导致的. 默认情况下, JS在发送AJAX请求时, URL的域名必须和当前页面完全一致.</p>
+<p>完全一致的含义:</p>
+<blockquote>
+<p>域名要相同（<a href="http://www.example.com和example.com不同）" target="_blank" rel="noopener">www.example.com和example.com不同）</a>, 协议要相同（http和https不同）, 端口号要相同（默认是:80端口, 它和:8080就不同）.有的浏览器口子松一点, 允许端口不同, 大多数浏览器都会严格遵守这个限制.</p>
+</blockquote>
+<p>如果JS需要请求外域(也就是其他网站)的URL怎么办?</p>
+<p>方法大概有这么几种:</p>
+<ol>
+<li><p>通过FLASH插件发送HTTP请求, 这种方法现在用的少了.</p>
+</li>
+<li><p>通过同源域名下架设一个代理服务器来转发, JS负责把请求发到代理服务器:<br><code>&#39;/proxy?url=http://www.sina.com.cn&#39;</code><br>代理服务器再把结果返回. 这种做法的麻烦之处在于服务端需要额外开发.</p>
+</li>
+<li><p>第三种方式称为JSONP, 它有个限制, 只能用GET请求, 并且要求返回JavaScript.这种方式跨域实际上是利用了浏览器允许跨域引用JavaScript资源.</p>
+</li>
+</ol>
+<p>以163的股票查询URL为例，从URL：<code>http://api.money.126.net/data/feed/0000001,1399001?callback=refreshPrice</code>这里获取查询结果, 可以这么写:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE Html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">'utf-8'</span>&gt;</span><span class="tag">&lt;/<span class="name">meta</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="comment">//data即getPrice中price.src传入的返回结果, 是一个JSON字符串</span></span></span><br><span class="line"><span class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">showPrice</span>(<span class="params">data</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> p=<span class="built_in">document</span>.getElementById(<span class="string">"test-jsonp"</span>);</span></span><br><span class="line"><span class="javascript">    p.innerHTML=<span class="string">"当前价格："</span>+</span></span><br><span class="line"><span class="javascript">    data[<span class="string">'0000001'</span>].name +<span class="string">': '</span> + </span></span><br><span class="line"><span class="javascript">    data[<span class="string">'0000001'</span>].price + <span class="string">'；'</span> +</span></span><br><span class="line"><span class="javascript">    data[<span class="string">'1399001'</span>].name + <span class="string">': '</span> +</span></span><br><span class="line"><span class="javascript">    data[<span class="string">'1399001'</span>].price;</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="comment">//点击"刷新"按钮时, 从'http://api.money.126.net/data/feed/0000001,1399001'请求JSON字符串,并把请求结果传给自定义函数showPrice()</span></span></span><br><span class="line"><span class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">getPrice</span>(<span class="params"></span>)</span>&#123;    </span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> price=<span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> head=<span class="built_in">document</span>.getElementsByTagName(<span class="string">"head"</span>)[<span class="number">0</span>];</span></span><br><span class="line"><span class="javascript">    price.src= <span class="string">'http://api.money.126.net/data/feed/0000001,1399001?callback=showPrice'</span>;</span></span><br><span class="line"><span class="undefined">    head.appendChild(price);</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"test-jsonp"</span>&gt;</span>placehoder<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">'button'</span> <span class="attr">onclick</span>=<span class="string">"getPrice()"</span>&gt;</span>刷新<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>refreshPrice</code>这个名称可以自定义为<code>showPrice()</code>, <code>price.src= &#39;http://api.money.126.net/data/feed/0000001,1399001?callback=showPrice&#39;;</code>的含义应该是将<code>http://api.money.126.net/data/feed/0000001,1399001</code>返回的结果传入回调函数<code>showPrice()</code>中, 然后showPrice()负责显示.</p>
+<h4 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h4><p>CORS全称<code>Cross-Origin Resource Sharing</code>, 是HTML5规范定义的如何跨域访问资源.</p>
+<p>Origin表示本域, 也就是浏览器当前页面的域.当JavaScript向外域（如sina.com）发起请求后, 浏览器收到响应后, 首先检查Access-Control-Allow-Origin是否包含本域, 如果是, 则此次跨域请求成功, 如果不是, 则请求失败, JavaScript将无法获取到响应的任何数据.</p>
+<p>用图表示:</p>
+<p><img src="https://wx3.sinaimg.cn/mw690/005BEzjegy1fpid6b15kej30gi05zwem.jpg" alt=""></p>
+<p>假设本域是my.com, 外域是sina.com, 只要响应头Access-Control-Allow-Origin为<a href="http://my.com" target="_blank" rel="noopener">http://my.com</a>, 或者是*, 本次请求就可以成功.</p>
+<p>可见, 跨域能否成功, 取决于对方服务器是否愿意给你设置一个正确的Access-Control-Allow-Origin, 决定权始终在对方手中.</p>
+<p>上面这种跨域请求, 称之为“简单请求”.简单请求包括GET、HEAD和POST（POST的Content-Type类型<br>仅限application/x-www-form-urlencoded、multipart/form-data和text/plain）, 并且不能出现任何自定义头（例如, X-Custom: 12345）, 通常能满足90%的需求.</p>
+<p>无论你是否需要用JavaScript通过CORS跨域请求资源, 你都要了解CORS的原理.最新的浏览器全面支持HTML5.在引用外域资源时, 除了JavaScript和CSS外, 都要验证CORS.例如, 当你引用了某个第三方CDN上的字体文件时：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* CSS */</span></span><br><span class="line">@<span class="keyword">font-face</span> &#123;</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="string">'FontAwesome'</span>;</span><br><span class="line">  <span class="attribute">src</span>: <span class="built_in">url</span>(<span class="string">'http://cdn.com/fonts/fontawesome.ttf'</span>) <span class="built_in">format</span>(<span class="string">'truetype'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果该CDN服务商未正确设置<code>Access-Control-Allow-Origin</code>, 那么浏览器无法加载字体资源.</p>
+<p>对于PUT、DELETE以及其他类型如application/json的POST请求, 在发送AJAX请求之前, 浏览器会先发送一个OPTIONS请求（称为preflighted请求）到这个URL上, 询问目标服务器是否接受：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">OPTIONS /path/to/resource HTTP/1.1</span><br><span class="line">Host: bar.com</span><br><span class="line">Origin: http://my.com</span><br><span class="line">Access-Control-Request-Method: POST</span><br></pre></td></tr></table></figure></p>
+<p>服务器必须响应并明确指出允许的Method：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Access-Control-Allow-Origin: http://my.com</span><br><span class="line">Access-Control-Allow-Methods: POST, GET, PUT, OPTIONS</span><br><span class="line">Access-Control-Max-Age: 86400</span><br></pre></td></tr></table></figure></p>
+<p>浏览器确认服务器响应的Access-Control-Allow-Methods头确实包含将要发送的AJAX请求的Method, 才会继续发送AJAX, 否则, 抛出一个错误.</p>
+<p>由于以POST、PUT方式传送JSON格式的数据在REST中很常见, 所以要跨域正确处理POST和PUT请求, 服务器端必须正确响应OPTIONS请求.</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AJAX/" rel="tag"># AJAX</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/03/linux/" rel="next" title="If it is Linux...">
+                <i class="fa fa-chevron-left"></i> If it is Linux...
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/10/JS-Promise/" rel="prev" title="JS笔记| Promise">
+                JS笔记| Promise <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">vinson</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">81</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#安全限制"><span class="nav-number">1.</span> <span class="nav-text">安全限制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CORS"><span class="nav-number">2.</span> <span class="nav-text">CORS</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">vinson</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Muse</a> v6.4.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
