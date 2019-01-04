@@ -135,7 +135,7 @@
   <meta name="keywords" content="python">
 <meta property="og:type" content="website">
 <meta property="og:title" content="vinson&#39;s blog">
-<meta property="og:url" content="http://vinsonwei.com/tags/OOP/index.html">
+<meta property="og:url" content="http://vinsonwei.com/tags/oop/index.html">
 <meta property="og:site_name" content="vinson&#39;s blog">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
@@ -146,7 +146,7 @@
 
 
 
-  <link rel="canonical" href="http://vinsonwei.com/tags/OOP/"/>
+  <link rel="canonical" href="http://vinsonwei.com/tags/oop/"/>
 
 
 
@@ -156,7 +156,7 @@
   };
 </script>
 
-  <title>标签: OOP | vinson's blog</title>
+  <title>标签: oop | vinson's blog</title>
   
 
 
@@ -320,7 +320,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h2>OOP<small>标签</small>
+        <h2>oop<small>标签</small>
         </h2>
       </div>
 
@@ -332,37 +332,9 @@
 
       <h3 class="post-title">
         
-            <a class="post-title-link" href="/JS-OOP-prototype-inheritance/" itemprop="url">
+            <a class="post-title-link" href="/JS-OOP-instinct-of-JS/" itemprop="url">
               
-                <span itemprop="name">JS笔记| OOP| 原型继承</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-02-01T21:21:26+08:00"
-              content="2018-02-01" >
-          02-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/JS-OOP-create-object/" itemprop="url">
-              
-                <span itemprop="name">JS笔记| 面向对象编程| 创建对象</span>
+                <span itemprop="name">JS笔记| 面向对象编程| 与众不同</span>
               
             </a>
         
@@ -370,9 +342,9 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-29T23:05:58+08:00"
-              content="2018-01-29" >
-          01-29
+              datetime="2018-01-28T00:00:00+08:00"
+              content="2018-01-28" >
+          01-28
         </time>
       </div>
 
@@ -920,6 +892,33 @@
       $(e).after($wrap)
       $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
         var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+</body>
+</html>
+n (i, e) {
           return $(e).text()
         }).toArray().join('\n')
         var ta = document.createElement('textarea')
